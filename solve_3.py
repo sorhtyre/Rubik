@@ -3,8 +3,6 @@
 from cube import pieces
 from si import do_move
 
-from debug import write_log_item
-
 
 def find_solution():
     '''Find solution'''
@@ -16,33 +14,33 @@ def find_solution():
     find_3(find_piece(tmp_pieces[2]))
     find_4(find_piece(tmp_pieces[3]))
 
-    return(pieces[12] == 'G' and pieces[37] == 'R' and \
-           pieces[14] == 'G' and pieces[46] == 'O' and \
-           pieces[30] == 'B' and pieces[43] == 'R' and \
+    return(pieces[12] == 'G' and pieces[37] == 'R' and
+           pieces[14] == 'G' and pieces[46] == 'O' and
+           pieces[30] == 'B' and pieces[43] == 'R' and
            pieces[32] == 'B' and pieces[52] == 'O')
 
 
 def find_piece(t_piece):
+    '''Find piece'''
 
     tmp_mids = [[12, 37], [10, 25], [14, 46], [50, 23],
                 [32, 52], [34, 19], [30, 43], [39, 21]]
-    
+
     for w_items in tmp_mids[:]:
-        if t_piece[0] in [pieces[w_items[0]],
-                          pieces[w_items[1]]]:
-            if t_piece[1] in [pieces[w_items[0]],
-                              pieces[w_items[1]]]:
-                return(w_items)
-                break
+        if t_piece[0] in [pieces[w_items[0]], pieces[w_items[1]]]:
+            if t_piece[1] in [pieces[w_items[0]], pieces[w_items[1]]]:
+                return w_items
+    return None
 
 
 def find_1(center_left):
     '''Find 1'''
 
     for tmp_item in center_left:
+
         if pieces[tmp_item] == 'R':
+
             if tmp_item == 10:
-                write_log_item('3 -1 - 10\r')
                 do_move('9')
                 do_move('9')
                 do_move('1')
@@ -52,8 +50,8 @@ def find_1(center_left):
                 do_move('5')
                 do_move('9')
                 do_move('6')
+
             elif tmp_item == 12:
-                write_log_item('3 -1 - 12\r')
                 do_move('1')
                 do_move('10')
                 do_move('2')
@@ -69,8 +67,8 @@ def find_1(center_left):
                 do_move('5')
                 do_move('9')
                 do_move('6')
+
             elif tmp_item == 14:
-                write_log_item('3 -1 - 14\r')
                 do_move('7')
                 do_move('10')
                 do_move('8')
@@ -86,8 +84,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 19:
-                write_log_item('3 -1 - 19\r')
                 do_move('9')
                 do_move('5')
                 do_move('9')
@@ -96,8 +94,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 21:
-                write_log_item('3 -1 - 21\r')
                 do_move('10')
                 do_move('10')
                 do_move('5')
@@ -107,8 +105,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 23:
-                write_log_item('3 -1 - 23\r')
                 do_move('5')
                 do_move('9')
                 do_move('6')
@@ -116,8 +114,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 25:
-                write_log_item('3 -1 - 25\r')
                 do_move('10')
                 do_move('5')
                 do_move('9')
@@ -126,8 +124,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 30:
-                write_log_item('3 -1 - 30\r')
                 do_move('6')
                 do_move('10')
                 do_move('5')
@@ -143,8 +141,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 32:
-                write_log_item('3 -1 - 32\r')
                 do_move('8')
                 do_move('9')
                 do_move('7')
@@ -160,8 +158,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 34:
-                write_log_item('3 -1 - 34\r')
                 do_move('1')
                 do_move('10')
                 do_move('2')
@@ -169,8 +167,8 @@ def find_1(center_left):
                 do_move('5')
                 do_move('9')
                 do_move('6')
+
             elif tmp_item == 39:
-                write_log_item('3 -1 - 39\r')
                 do_move('9')
                 do_move('1')
                 do_move('10')
@@ -179,8 +177,8 @@ def find_1(center_left):
                 do_move('5')
                 do_move('9')
                 do_move('6')
+
             elif tmp_item == 43:
-                write_log_item('3 -1 - 43\r')
                 do_move('3')
                 do_move('9')
                 do_move('4')
@@ -195,8 +193,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 46:
-                write_log_item('3 -1 - 46\r')
                 do_move('2')
                 do_move('9')
                 do_move('1')
@@ -213,8 +211,8 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             elif tmp_item == 50:
-                write_log_item('3 -1 - 50\r')
                 do_move('10')
                 do_move('1')
                 do_move('10')
@@ -223,8 +221,8 @@ def find_1(center_left):
                 do_move('5')
                 do_move('9')
                 do_move('6')
+
             elif tmp_item == 52:
-                write_log_item('3 -1 - 52\r')
                 do_move('4')
                 do_move('10')
                 do_move('3')
@@ -241,6 +239,7 @@ def find_1(center_left):
                 do_move('1')
                 do_move('10')
                 do_move('2')
+
             break
 
 
@@ -248,9 +247,10 @@ def find_2(center_right):
     '''Find 2'''
 
     for tmp_item in center_right:
+
         if pieces[tmp_item] == 'G':
+
             if tmp_item == 10:
-                write_log_item('3 -2 - 10\r')
                 do_move('9')
                 do_move('7')
                 do_move('10')
@@ -259,8 +259,8 @@ def find_2(center_right):
                 do_move('2')
                 do_move('9')
                 do_move('1')
+
             elif tmp_item == 19:
-                write_log_item('3 -2 - 19\r')
                 do_move('2')
                 do_move('9')
                 do_move('1')
@@ -268,8 +268,8 @@ def find_2(center_right):
                 do_move('7')
                 do_move('10')
                 do_move('8')
+
             elif tmp_item == 21:
-                write_log_item('3 -2 - 21\r')
                 do_move('9')
                 do_move('2')
                 do_move('9')
@@ -278,8 +278,8 @@ def find_2(center_right):
                 do_move('7')
                 do_move('10')
                 do_move('8')
+
             elif tmp_item == 23:
-                write_log_item('3 -2 - 23\r')
                 do_move('10')
                 do_move('2')
                 do_move('9')
@@ -288,8 +288,8 @@ def find_2(center_right):
                 do_move('7')
                 do_move('10')
                 do_move('8')
+
             elif tmp_item == 25:
-                write_log_item('3 -2 - 25\r')
                 do_move('9')
                 do_move('9')
                 do_move('2')
@@ -299,8 +299,8 @@ def find_2(center_right):
                 do_move('7')
                 do_move('10')
                 do_move('8')
+
             elif tmp_item == 30:
-                write_log_item('3 -2 - 30\r')
                 do_move('6')
                 do_move('10')
                 do_move('5')
@@ -317,8 +317,8 @@ def find_2(center_right):
                 do_move('7')
                 do_move('10')
                 do_move('8')
+
             elif tmp_item == 32:
-                write_log_item('3 -2 - 32\r')
                 do_move('8')
                 do_move('9')
                 do_move('7')
@@ -335,8 +335,8 @@ def find_2(center_right):
                 do_move('7')
                 do_move('10')
                 do_move('8')
+
             elif tmp_item == 34:
-                write_log_item('3 -2 - 34\r')
                 do_move('10')
                 do_move('7')
                 do_move('10')
@@ -345,8 +345,8 @@ def find_2(center_right):
                 do_move('2')
                 do_move('9')
                 do_move('1')
+
             elif tmp_item == 39:
-                write_log_item('3 -2 - 39\r')
                 do_move('7')
                 do_move('10')
                 do_move('8')
@@ -354,8 +354,8 @@ def find_2(center_right):
                 do_move('2')
                 do_move('9')
                 do_move('1')
+
             elif tmp_item == 43:
-                write_log_item('3 -2 - 43\r')
                 do_move('6')
                 do_move('10')
                 do_move('5')
@@ -371,8 +371,8 @@ def find_2(center_right):
                 do_move('2')
                 do_move('9')
                 do_move('1')
+
             elif tmp_item == 46:
-                write_log_item('3 -2 - 46\r')
                 do_move('7')
                 do_move('10')
                 do_move('8')
@@ -388,8 +388,8 @@ def find_2(center_right):
                 do_move('2')
                 do_move('9')
                 do_move('1')
+
             elif tmp_item == 50:
-                write_log_item('3 -2 - 50\r')
                 do_move('9')
                 do_move('9')
                 do_move('7')
@@ -399,8 +399,8 @@ def find_2(center_right):
                 do_move('2')
                 do_move('9')
                 do_move('1')
+
             elif tmp_item == 52:
-                write_log_item('3 -2 - 52\r')
                 do_move('8')
                 do_move('9')
                 do_move('7')
@@ -416,6 +416,7 @@ def find_2(center_right):
                 do_move('2')
                 do_move('9')
                 do_move('1')
+
             break
 
 
@@ -423,9 +424,10 @@ def find_3(center_bottom):
     '''Find 3'''
 
     for tmp_item in center_bottom:
+
         if pieces[tmp_item] == 'O':
+
             if tmp_item == 10:
-                write_log_item('3 -3 - 10\r')
                 do_move('4')
                 do_move('10')
                 do_move('3')
@@ -433,8 +435,8 @@ def find_3(center_bottom):
                 do_move('8')
                 do_move('9')
                 do_move('7')
+
             elif tmp_item == 19:
-                write_log_item('3 -3 - 19\r')
                 do_move('10')
                 do_move('8')
                 do_move('9')
@@ -443,8 +445,8 @@ def find_3(center_bottom):
                 do_move('4')
                 do_move('10')
                 do_move('3')
+
             elif tmp_item == 21:
-                write_log_item('3 -3 - 21\r')
                 do_move('8')
                 do_move('9')
                 do_move('7')
@@ -452,8 +454,8 @@ def find_3(center_bottom):
                 do_move('4')
                 do_move('10')
                 do_move('3')
+
             elif tmp_item == 23:
-                write_log_item('3 -3 - 23\r')
                 do_move('9')
                 do_move('9')
                 do_move('8')
@@ -463,8 +465,8 @@ def find_3(center_bottom):
                 do_move('4')
                 do_move('10')
                 do_move('3')
+
             elif tmp_item == 25:
-                write_log_item('3 -3 - 25\r')
                 do_move('9')
                 do_move('8')
                 do_move('9')
@@ -473,8 +475,8 @@ def find_3(center_bottom):
                 do_move('4')
                 do_move('10')
                 do_move('3')
+
             elif tmp_item == 30:
-                write_log_item('3 -3 - 30\r')
                 do_move('6')
                 do_move('10')
                 do_move('5')
@@ -490,8 +492,8 @@ def find_3(center_bottom):
                 do_move('4')
                 do_move('10')
                 do_move('3')
+
             elif tmp_item == 32:
-                write_log_item('3 -3 - 32\r')
                 do_move('8')
                 do_move('9')
                 do_move('7')
@@ -507,8 +509,8 @@ def find_3(center_bottom):
                 do_move('4')
                 do_move('10')
                 do_move('3')
+
             elif tmp_item == 34:
-                write_log_item('3 -3 - 34\r')
                 do_move('9')
                 do_move('9')
                 do_move('4')
@@ -518,8 +520,8 @@ def find_3(center_bottom):
                 do_move('8')
                 do_move('9')
                 do_move('7')
+
             elif tmp_item == 39:
-                write_log_item('3 -3 - 39\r')
                 do_move('10')
                 do_move('4')
                 do_move('10')
@@ -528,8 +530,8 @@ def find_3(center_bottom):
                 do_move('8')
                 do_move('9')
                 do_move('7')
+
             elif tmp_item == 43:
-                write_log_item('3 -3 - 43\r')
                 do_move('6')
                 do_move('10')
                 do_move('5')
@@ -544,8 +546,8 @@ def find_3(center_bottom):
                 do_move('8')
                 do_move('9')
                 do_move('7')
+
             elif tmp_item == 50:
-                write_log_item('3 -3 - 50\r')
                 do_move('9')
                 do_move('4')
                 do_move('10')
@@ -554,6 +556,7 @@ def find_3(center_bottom):
                 do_move('8')
                 do_move('9')
                 do_move('7')
+
             break
 
 
@@ -561,9 +564,10 @@ def find_4(center_top):
     '''Find 4'''
 
     for tmp_item in center_top:
+
         if pieces[tmp_item] == 'B':
+
             if tmp_item == 10:
-                write_log_item('3 -4 - 10\r')
                 do_move('10')
                 do_move('6')
                 do_move('10')
@@ -572,8 +576,8 @@ def find_4(center_top):
                 do_move('3')
                 do_move('9')
                 do_move('4')
+
             elif tmp_item == 19:
-                write_log_item('3 -4 - 19\r')
                 do_move('9')
                 do_move('9')
                 do_move('3')
@@ -583,8 +587,8 @@ def find_4(center_top):
                 do_move('6')
                 do_move('10')
                 do_move('5')
+
             elif tmp_item == 21:
-                write_log_item('3 -4 - 21\r')
                 do_move('10')
                 do_move('3')
                 do_move('9')
@@ -593,8 +597,8 @@ def find_4(center_top):
                 do_move('6')
                 do_move('10')
                 do_move('5')
+
             elif tmp_item == 23:
-                write_log_item('3 -4 - 23\r')
                 do_move('9')
                 do_move('3')
                 do_move('9')
@@ -603,8 +607,8 @@ def find_4(center_top):
                 do_move('6')
                 do_move('10')
                 do_move('5')
+
             elif tmp_item == 25:
-                write_log_item('3 -4 - 25\r')
                 do_move('3')
                 do_move('9')
                 do_move('4')
@@ -612,8 +616,8 @@ def find_4(center_top):
                 do_move('6')
                 do_move('10')
                 do_move('5')
+
             elif tmp_item == 34:
-                write_log_item('3 -4 - 34\r')
                 do_move('9')
                 do_move('6')
                 do_move('10')
@@ -622,8 +626,8 @@ def find_4(center_top):
                 do_move('3')
                 do_move('9')
                 do_move('4')
+
             elif tmp_item == 39:
-                write_log_item('3 -4 - 39\r')
                 do_move('9')
                 do_move('9')
                 do_move('6')
@@ -633,8 +637,8 @@ def find_4(center_top):
                 do_move('3')
                 do_move('9')
                 do_move('4')
+
             elif tmp_item == 43:
-                write_log_item('3 -4 - 43\r')
                 do_move('6')
                 do_move('10')
                 do_move('5')
@@ -650,8 +654,8 @@ def find_4(center_top):
                 do_move('3')
                 do_move('9')
                 do_move('4')
+
             elif tmp_item == 50:
-                write_log_item('3 -4 - 50\r')
                 do_move('6')
                 do_move('10')
                 do_move('5')
@@ -659,4 +663,5 @@ def find_4(center_top):
                 do_move('3')
                 do_move('9')
                 do_move('4')
+
             break
