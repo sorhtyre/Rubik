@@ -1,0 +1,5 @@
+# Ignore the byte-compiled directory
+__pycache__/
+
+# Ignore Logs
+*.log
