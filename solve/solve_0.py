@@ -1,10 +1,10 @@
 '''Rubik's solver functions'''
 
-from solve_1 import find_solution as find_cross
-from solve_2 import find_solution as find_corners
-from solve_3 import find_solution as find_edges
-from solve_4 import find_solution as find_top
-from solve_5 import find_solution as find_last
+from solve.solve_1 import find_solution as find_cross
+from solve.solve_2 import find_solution as find_corners
+from solve.solve_3 import find_solution as find_edges
+from solve.solve_4 import find_solution as find_top
+from solve.solve_5 import find_solution as find_last
 
 
 def solve_cube():
