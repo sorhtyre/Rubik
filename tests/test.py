@@ -1,7 +1,7 @@
 '''Rubik's solver functions'''
 
-from cube import pieces, default_pieces
-from si import do_move
+from data.cube import pieces
+from solver.si import do_move
 
 def test_solution():
     '''Find solution'''
@@ -44,7 +44,9 @@ def test_solution():
 
 
 def reset_test():
-    for i, piece in enumerate(pieces):
+    '''Reset test'''
+
+    for i, _ in enumerate(pieces):
         pieces[i] = 'B'
 
 

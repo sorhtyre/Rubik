@@ -1,10 +1,10 @@
 '''Solver interface functions'''
 
-from cube import side_1, side_2, side_3, side_4, side_5, side_6
-from cube import edge_1, edge_2, edge_3, edge_4, edge_5, edge_6
-from cube import center_1, center_2, center_3
-from move import rotate_cw, rotate_ccw
-from slog import write_log_item
+from data.cube import side_1, side_2, side_3, side_4, side_5, side_6
+from data.cube import edge_1, edge_2, edge_3, edge_4, edge_5, edge_6
+from data.cube import center_1, center_2, center_3
+from game.move import rotate_cw, rotate_ccw
+from common.slog import write_log_item
 
 
 def do_move(tmp_var):

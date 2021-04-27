@@ -1,6 +1,6 @@
 '''Cube movement functions'''
 
-from cube import pieces, default_pieces
+from data.cube import pieces, default_pieces
 
 
 def rotate_cw(section):

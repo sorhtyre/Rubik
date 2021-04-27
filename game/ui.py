@@ -7,14 +7,15 @@ from platform import system as arch
 from random import randint
 from random import choice
 
-from cube import side_1, side_2, side_3, side_4, side_5, side_6
-from cube import edge_1, edge_2, edge_3, edge_4, edge_5, edge_6
-from cube import center_1, center_2, center_3
-from log import write_log_item, delete_log_item, read_log, reset_log
-from slog import reset_log as reset_slog
-from move import rotate_cw, rotate_ccw, reset_cube
-from solve import solve_cube
-from test import test_solution
+from data.cube import side_1, side_2, side_3, side_4, side_5, side_6
+from data.cube import edge_1, edge_2, edge_3, edge_4, edge_5, edge_6
+from data.cube import center_1, center_2, center_3
+from common.log import write_log_item, delete_log_item, read_log, reset_log
+from common.slog import reset_log as reset_slog
+from solver.solve import solve_cube
+# from tests.test import test_solution
+
+from game.move import rotate_cw, rotate_ccw, reset_cube
 
 if arch() == 'Linux':
     CLEAR = 'clear'

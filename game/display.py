@@ -3,7 +3,7 @@
 from os import system as cli
 from platform import system as arch
 
-from cube import pieces
+from data.cube import pieces
 
 if arch() == 'Linux':
     R_ARROW = '▶'

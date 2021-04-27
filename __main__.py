@@ -2,8 +2,8 @@
 
 import sys
 
-from display import display
-from ui import load_move, do_move
+from game.display import display
+from game.ui import load_move, do_move
 
 # Verify Python version
 if sys.version_info[0] < 3:

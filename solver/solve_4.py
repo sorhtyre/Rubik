@@ -1,7 +1,7 @@
 '''Rubik's solver functions'''
 
-from cube import pieces
-from si import do_move
+from data.cube import pieces
+from solver.si import do_move
 
 
 def find_solution():
