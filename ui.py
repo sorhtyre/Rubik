@@ -13,7 +13,7 @@ from cube import center_1, center_2, center_3
 from log import write_log_item, delete_log_item, read_log, reset_log
 from slog import reset_log as reset_slog
 from move import rotate_cw, rotate_ccw, reset_cube
-from solve_1 import find_solution
+from solve import solve_cube
 from test import test_solution
 
 if arch() == 'Linux':
@@ -122,12 +122,12 @@ def do_move(tmp_var):
             reset_log()
             reset_slog()
             mix_cube()
-            works = find_solution()
+            works = solve_cube()
             count = count + 1
             print(count)
     elif tmp_var == 'F':
         reset_slog()
-        find_solution()
+        solve_cube()
     elif tmp_var == 'M':
         mix_cube()
     elif tmp_var == 'R':

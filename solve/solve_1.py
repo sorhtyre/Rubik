@@ -3,11 +3,6 @@
 from cube import pieces
 from si import do_move
 
-from solve_2 import find_solution as find_corners
-from solve_3 import find_solution as find_edges
-from solve_4 import find_solution as find_top
-from solve_5 import find_solution as find_last
-
 
 def find_solution():
     '''Find solution'''
@@ -26,11 +21,8 @@ def find_solution():
        pieces[7] == 'W' and pieces[28] == 'B' and \
        pieces[5] == 'W' and pieces[48] == 'O' and \
        pieces[3] == 'W' and pieces[41] == 'R':
+        return True
 
-        if find_corners():
-            if find_edges():
-                if find_top():
-                    return find_last()
     return False
 
 
