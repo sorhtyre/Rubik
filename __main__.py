@@ -3,7 +3,7 @@
 import sys
 
 from game.display import display
-from game.ui import load_move, do_move
+from game.ui import load_cube, do_move
 
 # Verify Python version
 if sys.version_info[0] < 3:
@@ -15,7 +15,7 @@ def main():
     '''Main function'''
 
     user_input = ''
-    load_move()
+    load_cube()
 
     while user_input != 'Q' or user_input != 'q':
         do_move(user_input.upper())

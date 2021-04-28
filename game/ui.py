@@ -1,20 +1,23 @@
 '''User interface functions'''
 
 import sys
+import time
 
 from os import system as cli
 from platform import system as arch
 from random import randint
 from random import choice
 
+from data.cube import pieces
 from data.cube import side_1, side_2, side_3, side_4, side_5, side_6
 from data.cube import edge_1, edge_2, edge_3, edge_4, edge_5, edge_6
 from data.cube import center_1, center_2, center_3
-from common.log import write_log_item, delete_log_item, read_log, reset_log
-from common.slog import reset_log as reset_slog
+from data.cube import u_moves, s_moves
+from common.log import read_log, write_log
 from solver.solve import solve_cube
 # from tests.test import test_solution
 
+from game.display import display
 from game.move import rotate_cw, rotate_ccw, reset_cube
 
 if arch() == 'Linux':
@@ -29,132 +32,131 @@ def do_move(tmp_var):
     if tmp_var == '1':
         rotate_cw(side_2)
         rotate_cw(edge_2)
-        write_log_item('[ 1] Side 2 - CW\r')
+        u_moves.append('[ 1] Side 2 - CW\r')
     elif tmp_var == '2':
         rotate_ccw(side_2)
         rotate_ccw(edge_2)
-        write_log_item('[ 2] Side 2 - CCW\r')
+        u_moves.append('[ 2] Side 2 - CCW\r')
     elif tmp_var == '3':
         rotate_ccw(side_4)
         rotate_ccw(edge_4)
-        write_log_item('[ 3] Side 4 - CCW\r')
+        u_moves.append('[ 3] Side 4 - CCW\r')
     elif tmp_var == '4':
         rotate_cw(side_4)
         rotate_cw(edge_4)
-        write_log_item('[ 4] Side 4 - CW\r')
+        u_moves.append('[ 4] Side 4 - CW\r')
     elif tmp_var == '5':
         rotate_ccw(side_5)
         rotate_ccw(edge_5)
-        write_log_item('[ 5] Side 5 - CCW\r')
+        u_moves.append('[ 5] Side 5 - CCW\r')
     elif tmp_var == '6':
         rotate_cw(side_5)
         rotate_cw(edge_5)
-        write_log_item('[ 6] Side 5 - CW\r')
+        u_moves.append('[ 6] Side 5 - CW\r')
     elif tmp_var == '7':
         rotate_cw(side_6)
         rotate_cw(edge_6)
-        write_log_item('[ 7] Side 6 - CW\r')
+        u_moves.append('[ 7] Side 6 - CW\r')
     elif tmp_var == '8':
         rotate_ccw(side_6)
         rotate_ccw(edge_6)
-        write_log_item('[ 8] Side 6 - CCW\r')
+        u_moves.append('[ 8] Side 6 - CCW\r')
     elif tmp_var == '9':
         rotate_cw(side_3)
         rotate_cw(edge_3)
-        write_log_item('[ 9] Side 3 - CW\r')
+        u_moves.append('[ 9] Side 3 - CW\r')
     elif tmp_var == '10':
         rotate_ccw(side_3)
         rotate_ccw(edge_3)
-        write_log_item('[10] Side 3 - CCW\r')
+        u_moves.append('[10] Side 3 - CCW\r')
     elif tmp_var == '11':
         rotate_ccw(side_1)
         rotate_ccw(edge_1)
-        write_log_item('[11] Side 1 - CCW\r')
+        u_moves.append('[11] Side 1 - CCW\r')
     elif tmp_var == '12':
         rotate_cw(side_1)
         rotate_cw(edge_1)
-        write_log_item('[12] Side 1 - CW\r')
+        u_moves.append('[12] Side 1 - CW\r')
     elif tmp_var == 'SL':
         rotate_cw(side_2)
         rotate_cw(edge_2)
         rotate_ccw(center_1)
         rotate_ccw(side_4)
         rotate_ccw(edge_4)
-        write_log_item('[SL] Shift cube left\r')
+        u_moves.append('[SL] Shift cube left\r')
     if tmp_var == 'SR':
         rotate_ccw(side_2)
         rotate_ccw(edge_2)
         rotate_cw(center_1)
         rotate_cw(side_4)
         rotate_cw(edge_4)
-        write_log_item('[SR] Shift cube right\r')
+        u_moves.append('[SR] Shift cube right\r')
     elif tmp_var == 'SU':
         rotate_ccw(side_5)
         rotate_ccw(edge_5)
         rotate_ccw(center_2)
         rotate_cw(side_6)
         rotate_cw(edge_6)
-        write_log_item('[SU] Shift cube up\r')
+        u_moves.append('[SU] Shift cube up\r')
     elif tmp_var == 'SD':
         rotate_cw(side_5)
         rotate_cw(edge_5)
         rotate_cw(center_2)
         rotate_ccw(side_6)
         rotate_ccw(edge_6)
-        write_log_item('[SR] Shift cube down\r')
+        u_moves.append('[SR] Shift cube down\r')
     elif tmp_var == 'RL':
         rotate_cw(side_3)
         rotate_cw(edge_3)
         rotate_ccw(center_3)
         rotate_ccw(side_1)
         rotate_ccw(edge_1)
-        write_log_item('[RL] Rotate cube left\r')
+        u_moves.append('[RL] Rotate cube left\r')
     elif tmp_var == 'RR':
         rotate_ccw(side_3)
         rotate_ccw(edge_3)
         rotate_cw(center_3)
         rotate_cw(side_1)
         rotate_cw(edge_1)
-        write_log_item('[RR] Rotate cube right\r')
+        u_moves.append('[RR] Rotate cube right\r')
     elif tmp_var == 'T':
-        works = True
-        count = 0
-        while works:
-            reset_log()
-            reset_slog()
-            mix_cube()
-            works = solve_cube()
-            count = count + 1
-            print(count)
+        test_cube()
     elif tmp_var == 'F':
-        reset_slog()
+        t_cube = pieces[:]
         solve_cube()
+        save_solution()
+        pieces[:] = t_cube[:]
     elif tmp_var == 'M':
         mix_cube()
     elif tmp_var == 'R':
         reset_cube()
-        reset_log()
+        u_moves.clear()
     elif tmp_var == 'U':
         undo_move()
     elif tmp_var == 'S':
         cli(CLEAR)
-        print('Saving moves and quiting...')
+        write_log('cube.log', u_moves)
+        print('Saving moves...')
+        time.sleep(.5)
+        display()
+    elif tmp_var == 'E':
+        cli(CLEAR)
+        write_log('cube.log', u_moves)
+        print('Saving moves and exiting...')
         sys.exit()
     elif tmp_var == 'Q':
         cli(CLEAR)
-        reset_log()
-        print('Clearing moves and quiting...')
+        print('Quiting...')
         sys.exit()
 
 
 def undo_move():
     '''Undo last move'''
 
-    line_list = read_log()
+    if len(u_moves) > 0:
 
-    if len(line_list) > 0:
-
-        last_move = line_list[-1][1:3].strip()
+        tmp_move = u_moves.pop()
+        last_move = tmp_move[1:3].strip()
 
         if last_move.isalpha():
             if last_move == 'SL':
@@ -174,22 +176,17 @@ def undo_move():
                    '8', '7', '10', '9', '12', '11']
             do_move(opp[int(last_move)-1])
 
-        delete_log_item()
+        u_moves.pop()
 
 
-def load_move():
-    '''Load moves from log'''
+def load_cube():
+    '''Load cube moves from log'''
 
-    line_list = read_log()
+    tmp_lines = read_log('cube.log')
 
-    if len(line_list) > 0:
-        for tmp_line in line_list:
-            do_move(tmp_line[1:3].strip())
-
-        reset_log()
-
-        for tmp_line in line_list:
-            write_log_item(tmp_line)
+    if len(tmp_lines) > 0:
+        for t_line in tmp_lines:
+            do_move(t_line[1:3].strip())
 
 
 def mix_cube():
@@ -200,3 +197,37 @@ def mix_cube():
         tmp_choice = choice(['1', '2', '3', '4', '5', '6',
                              '7', '8', '9', '10', '11', '12'])
         do_move(tmp_choice)
+
+def test_cube():
+    '''Test random generated cubes'''
+
+    t_start = time.time()
+
+    works = True
+    count = 0
+    cli(CLEAR)
+
+    while works and count < 10000:
+        count = count + 1
+        print('Solving: ' + str(count), end='\r', flush=True)
+        mix_cube()
+        works = solve_cube()
+        u_moves.clear()
+        s_moves.clear()
+
+    t_end = time.time()
+
+    print('Solved ' + str(count) + ' random cubes in ' +
+          str(t_end - t_start) + ' secs')
+    print(str((t_end - t_start)/count) + ' secs per cube')
+    time.sleep(5)
+
+def save_solution():
+    '''Save solution to file'''
+
+    cli(CLEAR)
+    write_log('solve.log', s_moves)
+    print('Saving solution to solve.log...')
+    s_moves.clear()
+    time.sleep(1)
+    display()

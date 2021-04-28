@@ -2,50 +2,38 @@
 
 import os
 
-FILENAME = 'cube.log'
 
-
-def check_log():
+def check_log(tmp_file):
     '''Check the log file'''
-    if os.path.isfile(FILENAME):
-        if os.stat(FILENAME).st_size > 0:
+    if os.path.isfile(tmp_file):
+        if os.stat(tmp_file).st_size > 0:
             return True
     return False
 
 
-def write_log_item(tmp_msg):
+def write_log(tmp_file, tmp_log):
     '''Write move to log'''
 
-    file_handle = open(FILENAME, 'a')
-    file_handle.write(tmp_msg)
+    file_handle = open(tmp_file, 'w')
+    file_handle.writelines(tmp_log)
     file_handle.close()
 
 
-def delete_log_item():
-    '''Delete a line from the log file'''
-
-    if check_log():
-        line_list = read_log()[:-2]
-        file_handle = open(FILENAME, 'w')
-        for tmp_line in line_list:
-            file_handle.write(tmp_line)
-        file_handle.close()
-
-
-def read_log():
+def read_log(tmp_file):
     '''Read the log file'''
 
-    if check_log():
-        file_handle = open(FILENAME, 'r')
-        line_list = file_handle.readlines()
+    tmp_log = []
+
+    if check_log(tmp_file):
+        file_handle = open(tmp_file, 'r')
+        tmp_log = file_handle.readlines()
         file_handle.close()
-        return line_list
-    return ''
+    return tmp_log
 
 
-def reset_log():
+def reset_log(tmp_file):
     '''Clear the log file'''
 
-    file_handle = open(FILENAME, 'w')
+    file_handle = open(tmp_file, 'w')
     file_handle.truncate(0)
     file_handle.close()
