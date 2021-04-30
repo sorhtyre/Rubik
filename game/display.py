@@ -119,12 +119,12 @@ def display():
           set_color(pieces[27]) + '  ' +
           set_color(pieces[28]) + '  ' +
           set_color(pieces[29]) + '        ' +
-          '[U]ndo last move')
+          '[U]ndo last move    [S]ave moves')
     print('                ' +
           set_color(pieces[30]) + '  ' +
           set_color(pieces[31]) + '  ' +
           set_color(pieces[32]) + '        ' +
-          '[M]ix the cube      [S]ave and quit')
+          '[M]ix the cube      [E]xit and save moves')
     print('                ' +
           set_color(pieces[33]) + '  ' +
           set_color(pieces[34]) + '  ' +

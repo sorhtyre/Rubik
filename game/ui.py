@@ -142,11 +142,11 @@ def do_move(tmp_var):
     elif tmp_var == 'E':
         cli(CLEAR)
         write_log('cube.log', u_moves)
-        print('Saving moves and exiting...')
+        print('Exiting and saving moves...')
         sys.exit()
     elif tmp_var == 'Q':
         cli(CLEAR)
-        print('Quiting...')
+        print('Quiting without saving...')
         sys.exit()
 
 
@@ -198,6 +198,7 @@ def mix_cube():
                              '7', '8', '9', '10', '11', '12'])
         do_move(tmp_choice)
 
+
 def test_cube():
     '''Test random generated cubes'''
 
@@ -207,13 +208,16 @@ def test_cube():
     count = 0
     cli(CLEAR)
 
+    print('Solving: ', end='', flush=True)
+
     while works and count < 10000:
         count = count + 1
-        print('Solving: ' + str(count), end='\r', flush=True)
+        print(count, end='', flush=True)
         mix_cube()
         works = solve_cube()
         u_moves.clear()
         s_moves.clear()
+        print('\033['+ str(len("%i" % count)) +'D', end='', flush=True)
 
     t_end = time.time()
 
@@ -221,6 +225,7 @@ def test_cube():
           str(t_end - t_start) + ' secs')
     print(str((t_end - t_start)/count) + ' secs per cube')
     time.sleep(5)
+
 
 def save_solution():
     '''Save solution to file'''
