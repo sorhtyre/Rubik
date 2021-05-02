@@ -11,7 +11,7 @@ def find_solution():
         symbol()
         find_0()
 
-    while [pieces[18], pieces[20], pieces[24], pieces[26]].count('Y') != 4:
+    while not pieces[18] == pieces[20] == pieces[24] == pieces[26] == 'Y':
         tmp_count = [pieces[18], pieces[20], pieces[24], pieces[26]].count('Y')
 
         if tmp_count == 0:
@@ -35,8 +35,7 @@ def find_solution():
 def find_mids():
     '''Find mids'''
 
-    if pieces[19] == 'Y' and pieces[21] == 'Y' and \
-       pieces[23] == 'Y' and pieces[25] == 'Y':
+    if pieces[19] == pieces[21] == pieces[23] == pieces[25] == 'Y':
         return True
 
     return False
@@ -59,15 +58,12 @@ def symbol():
 def find_a():
     '''Fish'''
 
-    if pieces[18] == 'Y' and pieces[19] == 'Y' and pieces[21] == 'Y' and \
-       pieces[23] == 'Y' and pieces[25] == 'Y':
+    if pieces[18] == pieces[19] == pieces[21] == pieces[23] == pieces[25] == 'Y':
         do_move('10')
-    elif (pieces[19] == 'Y' and pieces[20] == 'Y' and pieces[21] == 'Y' and
-          pieces[23] == 'Y' and pieces[25] == 'Y'):
+    elif pieces[19] == pieces[20] == pieces[21] == pieces[23] == pieces[25] == 'Y':
         do_move('10')
         do_move('10')
-    elif (pieces[19] == 'Y' and pieces[21] == 'Y' and pieces[23] == 'Y' and
-          pieces[25] == 'Y' and pieces[26] == 'Y'):
+    elif pieces[19] == pieces[21] == pieces[23] == pieces[25] == pieces[26] == 'Y':
         do_move('9')
 
 
@@ -86,15 +82,12 @@ def find_b():
 def find_c():
     '''School'''
 
-    if pieces[19] == 'Y' and pieces[21] == 'Y' and pieces[23] == 'Y' and \
-       pieces[24] == 'Y' and pieces[25] == 'Y' and pieces[26] == 'Y':
+    if pieces[19] == pieces[21] == pieces[23] == pieces[24] == pieces[25] == pieces[26] == 'Y':
         do_move('10')
-    elif (pieces[18] == 'Y' and pieces[19] == 'Y' and pieces[21] == 'Y' and
-          pieces[23] == 'Y' and pieces[24] == 'Y' and pieces[25] == 'Y'):
+    elif pieces[18] == pieces[19] == pieces[21] == pieces[23] == pieces[24] == pieces[25] == 'Y':
         do_move('10')
         do_move('10')
-    elif (pieces[18] == 'Y' and pieces[19] == 'Y' and pieces[20] == 'Y' and
-          pieces[21] == 'Y' and pieces[23] == 'Y' and pieces[25] == 'Y'):
+    elif pieces[18] == pieces[19] == pieces[20] == pieces[21] == pieces[23] == pieces[25] == 'Y':
         do_move('9')
 
 
