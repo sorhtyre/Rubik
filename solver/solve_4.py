@@ -7,7 +7,7 @@ from solver.si import do_move
 def find_solution():
     '''Find solution'''
 
-    while not find_mids():
+    while not pieces[19] == pieces[21] == pieces[23] == pieces[25] == 'Y':
         symbol()
         find_0()
 
@@ -30,15 +30,6 @@ def find_solution():
         find_1()
 
     return True
-
-
-def find_mids():
-    '''Find mids'''
-
-    if pieces[19] == pieces[21] == pieces[23] == pieces[25] == 'Y':
-        return True
-
-    return False
 
 
 def symbol():

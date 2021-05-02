@@ -17,13 +17,10 @@ def find_solution():
     find_3(find_piece(tmp_pieces[2]))
     find_4(find_piece(tmp_pieces[3]))
 
-    if pieces[1] == 'W' and pieces[16] == 'G' and \
-       pieces[7] == 'W' and pieces[28] == 'B' and \
-       pieces[5] == 'W' and pieces[48] == 'O' and \
-       pieces[3] == 'W' and pieces[41] == 'R':
-        return True
-
-    return False
+    return(pieces[1] == 'W' and pieces[16] == 'G' and
+           pieces[7] == 'W' and pieces[28] == 'B' and
+           pieces[5] == 'W' and pieces[48] == 'O' and
+           pieces[3] == 'W' and pieces[41] == 'R')
 
 
 def find_piece(t_piece):
