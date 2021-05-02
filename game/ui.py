@@ -1,6 +1,5 @@
 '''User interface functions'''
 
-import sys
 import time
 
 from os import system as cli
@@ -8,17 +7,14 @@ from platform import system as arch
 from random import randint
 from random import choice
 
-from data.cube import pieces
-from data.cube import side_1, side_2, side_3, side_4, side_5, side_6
-from data.cube import edge_1, edge_2, edge_3, edge_4, edge_5, edge_6
-from data.cube import center_1, center_2, center_3
-from data.cube import u_moves, s_moves
 from common.log import read_log, write_log
+from common.switch import switch, args
+from data.cube import pieces, u_moves, s_moves
 from solver.solve import solve_cube
-# from tests.test import test_solution
 
 from game.display import display
-from game.move import rotate_cw, rotate_ccw, reset_cube
+from game.move import reset_cube
+
 
 if arch() == 'Linux':
     CLEAR = 'clear'
@@ -26,128 +22,29 @@ else:
     CLEAR = 'cls'
 
 
-def do_move(tmp_var):
+def do_move(t_val):
     '''Execute move'''
 
-    if tmp_var == '1':
-        rotate_cw(side_2)
-        rotate_cw(edge_2)
-        u_moves.append('[ 1] Side 2 - CW\r')
-    elif tmp_var == '2':
-        rotate_ccw(side_2)
-        rotate_ccw(edge_2)
-        u_moves.append('[ 2] Side 2 - CCW\r')
-    elif tmp_var == '3':
-        rotate_ccw(side_4)
-        rotate_ccw(edge_4)
-        u_moves.append('[ 3] Side 4 - CCW\r')
-    elif tmp_var == '4':
-        rotate_cw(side_4)
-        rotate_cw(edge_4)
-        u_moves.append('[ 4] Side 4 - CW\r')
-    elif tmp_var == '5':
-        rotate_ccw(side_5)
-        rotate_ccw(edge_5)
-        u_moves.append('[ 5] Side 5 - CCW\r')
-    elif tmp_var == '6':
-        rotate_cw(side_5)
-        rotate_cw(edge_5)
-        u_moves.append('[ 6] Side 5 - CW\r')
-    elif tmp_var == '7':
-        rotate_cw(side_6)
-        rotate_cw(edge_6)
-        u_moves.append('[ 7] Side 6 - CW\r')
-    elif tmp_var == '8':
-        rotate_ccw(side_6)
-        rotate_ccw(edge_6)
-        u_moves.append('[ 8] Side 6 - CCW\r')
-    elif tmp_var == '9':
-        rotate_cw(side_3)
-        rotate_cw(edge_3)
-        u_moves.append('[ 9] Side 3 - CW\r')
-    elif tmp_var == '10':
-        rotate_ccw(side_3)
-        rotate_ccw(edge_3)
-        u_moves.append('[10] Side 3 - CCW\r')
-    elif tmp_var == '11':
-        rotate_ccw(side_1)
-        rotate_ccw(edge_1)
-        u_moves.append('[11] Side 1 - CCW\r')
-    elif tmp_var == '12':
-        rotate_cw(side_1)
-        rotate_cw(edge_1)
-        u_moves.append('[12] Side 1 - CW\r')
-    elif tmp_var == 'SL':
-        rotate_cw(side_2)
-        rotate_cw(edge_2)
-        rotate_ccw(center_1)
-        rotate_ccw(side_4)
-        rotate_ccw(edge_4)
-        u_moves.append('[SL] Shift cube left\r')
-    if tmp_var == 'SR':
-        rotate_ccw(side_2)
-        rotate_ccw(edge_2)
-        rotate_cw(center_1)
-        rotate_cw(side_4)
-        rotate_cw(edge_4)
-        u_moves.append('[SR] Shift cube right\r')
-    elif tmp_var == 'SU':
-        rotate_ccw(side_5)
-        rotate_ccw(edge_5)
-        rotate_ccw(center_2)
-        rotate_cw(side_6)
-        rotate_cw(edge_6)
-        u_moves.append('[SU] Shift cube up\r')
-    elif tmp_var == 'SD':
-        rotate_cw(side_5)
-        rotate_cw(edge_5)
-        rotate_cw(center_2)
-        rotate_ccw(side_6)
-        rotate_ccw(edge_6)
-        u_moves.append('[SR] Shift cube down\r')
-    elif tmp_var == 'RL':
-        rotate_cw(side_3)
-        rotate_cw(edge_3)
-        rotate_ccw(center_3)
-        rotate_ccw(side_1)
-        rotate_ccw(edge_1)
-        u_moves.append('[RL] Rotate cube left\r')
-    elif tmp_var == 'RR':
-        rotate_ccw(side_3)
-        rotate_ccw(edge_3)
-        rotate_cw(center_3)
-        rotate_cw(side_1)
-        rotate_cw(edge_1)
-        u_moves.append('[RR] Rotate cube right\r')
-    elif tmp_var == 'T':
-        test_cube()
-    elif tmp_var == 'F':
-        t_cube = pieces[:]
-        solve_cube()
-        save_solution()
-        pieces[:] = t_cube[:]
-    elif tmp_var == 'M':
+    if t_val == 'M':
         mix_cube()
-    elif tmp_var == 'R':
+    elif t_val == 'R':
         reset_cube()
         u_moves.clear()
-    elif tmp_var == 'U':
+    elif t_val == 'U':
         undo_move()
-    elif tmp_var == 'S':
-        cli(CLEAR)
-        write_log('cube.log', u_moves)
-        print('Saving moves...')
-        time.sleep(.5)
-        display()
-    elif tmp_var == 'E':
-        cli(CLEAR)
-        write_log('cube.log', u_moves)
-        print('Exiting and saving moves...')
-        sys.exit()
-    elif tmp_var == 'Q':
-        cli(CLEAR)
-        print('Quiting without saving...')
-        sys.exit()
+    elif t_val == 'F':
+        find_solution()
+    elif t_val == 'T':
+        test_solver()
+    else:
+        try:
+            for i, func in enumerate(switch[t_val]):
+                if len(args[t_val]) > i:
+                    func(args[t_val][i])
+                else:
+                    func()
+        except KeyError:
+            time.sleep(0)
 
 
 def undo_move():
@@ -199,7 +96,27 @@ def mix_cube():
         do_move(tmp_choice)
 
 
-def test_cube():
+def find_solution():
+    '''Find solution for current cube'''
+
+    t_cube = pieces[:]
+    solve_cube()
+    save_solution()
+    pieces[:] = t_cube[:]
+
+
+def save_solution():
+    '''Save solution to file'''
+
+    cli(CLEAR)
+    write_log(['solve.log', s_moves])
+    print('Saving solution to solve.log...')
+    s_moves.clear()
+    time.sleep(1)
+    display()
+
+
+def test_solver():
     '''Test random generated cubes'''
 
     t_start = time.time()
@@ -217,7 +134,7 @@ def test_cube():
         works = solve_cube()
         u_moves.clear()
         s_moves.clear()
-        print('\033['+ str(len("%i" % count)) +'D', end='', flush=True)
+        print('\033[' + str(len("%i" % count)) + 'D', end='', flush=True)
 
     t_end = time.time()
 
@@ -225,14 +142,3 @@ def test_cube():
           str(t_end - t_start) + ' secs')
     print(str((t_end - t_start)/count) + ' secs per cube')
     time.sleep(5)
-
-
-def save_solution():
-    '''Save solution to file'''
-
-    cli(CLEAR)
-    write_log('solve.log', s_moves)
-    print('Saving solution to solve.log...')
-    s_moves.clear()
-    time.sleep(1)
-    display()

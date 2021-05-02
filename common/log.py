@@ -11,11 +11,11 @@ def check_log(tmp_file):
     return False
 
 
-def write_log(tmp_file, tmp_log):
+def write_log(tmp_list):
     '''Write move to log'''
 
-    file_handle = open(tmp_file, 'w')
-    file_handle.writelines(tmp_log)
+    file_handle = open(tmp_list[0], 'w')
+    file_handle.writelines(tmp_list[1])
     file_handle.close()
 
 
