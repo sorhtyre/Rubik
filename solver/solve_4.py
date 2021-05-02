@@ -75,12 +75,12 @@ def find_b():
     '''Plus'''
 
     if pieces[9] == 'Y' and pieces[11] == 'Y':
-        do_move(9)
+        do_move('9')
     elif pieces[45] == 'Y' and pieces[47] == 'Y':
-        do_move(9)
-        do_move(9)
+        do_move('9')
+        do_move('9')
     elif pieces[33] == 'Y' and pieces[29] == 'Y':
-        do_move(10)
+        do_move('10')
 
 
 def find_c():
