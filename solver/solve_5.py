@@ -25,20 +25,23 @@ def find_solution():
             if pieces[t_edge[0]] != pieces[t_edge[1]] and \
                pieces[t_edge[0]] != pieces[t_edge[2]] and \
                pieces[t_edge[1]] != pieces[t_edge[2]]:
-                tmp_one = tmp_one + 1
+                tmp_one += 1
 
             elif (pieces[t_edge[0]] == pieces[t_edge[1]] and
                   pieces[t_edge[0]] != pieces[t_edge[2]]):
-                tmp_two = tmp_two + 1
+                tmp_two += 1
+
             elif (pieces[t_edge[1]] == pieces[t_edge[2]] and
                   pieces[t_edge[1]] != pieces[t_edge[0]]):
-                tmp_two = tmp_two + 1
+                tmp_two += 1
+
             elif (pieces[t_edge[0]] == pieces[t_edge[1]] and
                   pieces[t_edge[1]] == pieces[t_edge[2]]):
-                tmp_three = tmp_three + 1
+                tmp_three += 1
+
             elif (pieces[t_edge[0]] == pieces[t_edge[2]] and
                   pieces[t_edge[0]] != pieces[t_edge[1]]):
-                tmp_corners = tmp_corners + 1
+                tmp_corners += 1
 
         if tmp_three == 4:
             tmp_loop = False

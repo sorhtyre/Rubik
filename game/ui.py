@@ -128,7 +128,7 @@ def test_solver():
     print('Solving: ', end='', flush=True)
 
     while works and count < 10000:
-        count = count + 1
+        count += 1
         print(count, end='', flush=True)
         mix_cube()
         works = solve_cube()
