@@ -14,3 +14,9 @@ def do_move(t_val):
             func(args[t_val][i])
         else:
             func()
+
+def do_seq(arg_list):
+    '''Do sequence of moves'''
+
+    for arg in arg_list:
+        do_move(arg)
