@@ -1,7 +1,7 @@
 '''Rubik's solver functions'''
 
 from data.cube import pieces
-from solver.si import do_move
+from solver.si import do_move, do_seq
 
 
 def find_solution():
@@ -44,588 +44,142 @@ def find_piece(t_piece):
 def find_5(top_left):
     '''Find 1'''
 
+    pos = {
+        0:  [],
+        2:  ['7', '10', '8', '5', '9', '6'],
+        6:  ['3', '9', '4', '1', '10', '2'],
+        8:  ['8', '10', '7', '10', '1', '9', '2'],
+        9:  ['1', '9', '2'],
+        11: ['10', '1', '9', '9', '2'],
+        15: ['1', '9', '2', '10', '1', '9', '2'],
+        17: ['7', '10', '8', '9', '5', '10', '6'],
+        18: ['7', '9', '8', '9', '5', '10', '6'],
+        20: ['9', '7', '5', '9', '9', '6', '8'],
+        24: ['10', '7', '5', '9', '9', '6', '8'],
+        26: ['7', '5', '9', '9', '6', '8'],
+        27: ['3', '10', '4', '2', '6', '1', '5'],
+        29: ['4', '9', '3', '5', '9', '6'],
+        33: ['1', '10', '2'],
+        35: ['5', '9', '9', '6'],
+        36: ['9', '1', '10', '2'],
+        38: ['5', '10', '6', '9', '5', '10', '6'],
+        42: ['10', '1', '9', '2'],
+        44: ['3', '9', '4', '10', '1', '9', '2'],
+        45: ['7', '5', '9', '6', '8'],
+        47: ['5', '9', '6'],
+        51: ['8', '10', '7', '1', '10', '2'],
+        53: ['1', '9', '9', '2']
+    }
+
     for tmp_item in top_left:
-
         if pieces[tmp_item] == 'W':
-
-            if tmp_item == 2:
-                do_move('7')
-                do_move('10')
-                do_move('8')
-                do_move('5')
-                do_move('9')
-                do_move('6')
-
-            elif tmp_item == 6:
-                do_move('3')
-                do_move('9')
-                do_move('4')
-                do_move('1')
-                do_move('10')
-                do_move('2')
-
-            elif tmp_item == 8:
-                do_move('8')
-                do_move('10')
-                do_move('7')
-                do_move('10')
-                do_move('1')
-                do_move('9')
-                do_move('2')
-
-            elif tmp_item == 9:
-                do_move('1')
-                do_move('9')
-                do_move('2')
-
-            elif tmp_item == 11:
-                do_move('10')
-                do_move('1')
-                do_move('9')
-                do_move('9')
-                do_move('2')
-
-            elif tmp_item == 15:
-                do_move('1')
-                do_move('9')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-                do_move('9')
-                do_move('2')
-
-            elif tmp_item == 17:
-                do_move('7')
-                do_move('10')
-                do_move('8')
-                do_move('9')
-                do_move('5')
-                do_move('10')
-                do_move('6')
-
-            elif tmp_item == 18:
-                do_move('7')
-                do_move('9')
-                do_move('8')
-                do_move('9')
-                do_move('5')
-                do_move('10')
-                do_move('6')
-
-            elif tmp_item == 20:
-                do_move('9')
-                do_move('7')
-                do_move('5')
-                do_move('9')
-                do_move('9')
-                do_move('6')
-                do_move('8')
-
-            elif tmp_item == 24:
-                do_move('10')
-                do_move('7')
-                do_move('5')
-                do_move('9')
-                do_move('9')
-                do_move('6')
-                do_move('8')
-
-            elif tmp_item == 26:
-                do_move('7')
-                do_move('5')
-                do_move('9')
-                do_move('9')
-                do_move('6')
-                do_move('8')
-
-            elif tmp_item == 27:
-                do_move('3')
-                do_move('10')
-                do_move('4')
-                do_move('2')
-                do_move('6')
-                do_move('1')
-                do_move('5')
-
-            elif tmp_item == 29:
-                do_move('4')
-                do_move('9')
-                do_move('3')
-                do_move('5')
-                do_move('9')
-                do_move('6')
-
-            elif tmp_item == 33:
-                do_move('1')
-                do_move('10')
-                do_move('2')
-
-            elif tmp_item == 35:
-                do_move('5')
-                do_move('9')
-                do_move('9')
-                do_move('6')
-
-            elif tmp_item == 36:
-                do_move('9')
-                do_move('1')
-                do_move('10')
-                do_move('2')
-
-            elif tmp_item == 38:
-                do_move('5')
-                do_move('10')
-                do_move('6')
-                do_move('9')
-                do_move('5')
-                do_move('10')
-                do_move('6')
-
-            elif tmp_item == 42:
-                do_move('10')
-                do_move('1')
-                do_move('9')
-                do_move('2')
-
-            elif tmp_item == 44:
-                do_move('3')
-                do_move('9')
-                do_move('4')
-                do_move('10')
-                do_move('1')
-                do_move('9')
-                do_move('2')
-
-            elif tmp_item == 45:
-                do_move('7')
-                do_move('5')
-                do_move('9')
-                do_move('6')
-                do_move('8')
-
-            elif tmp_item == 47:
-                do_move('5')
-                do_move('9')
-                do_move('6')
-
-            elif tmp_item == 51:
-                do_move('8')
-                do_move('10')
-                do_move('7')
-                do_move('1')
-                do_move('10')
-                do_move('2')
-
-            elif tmp_item == 53:
-                do_move('1')
-                do_move('9')
-                do_move('9')
-                do_move('2')
-
+            do_seq(pos[tmp_item])
             break
 
 
 def find_6(bot_left):
     '''Find 2'''
 
+    pos = {
+        0:  [],
+        2:  ['6', '7', '10', '10', '5', '8'],
+        6:  [],
+        8:  ['8', '9', '7', '6', '10', '5'],
+        9:  ['9', '6', '9', '5'],
+        11: ['6', '9', '9', '5'],
+        15: [],
+        17: ['2', '6', '9', '9', '5', '1'],
+        18: ['3', '9', '4', '6', '9', '9', '5'],
+        20: ['4', '5', '3', '6', '3', '9', '4'],
+        24: ['5', '4', '6', '3', '6', '10', '5'],
+        26: ['6', '9', '5', '9', '6', '10', '5'],
+        27: ['6', '10', '5', '9', '6', '10', '5'],
+        29: ['8', '9', '7', '10', '6', '9', '5'],
+        33: ['9', '6', '10', '5'],
+        35: ['10', '6', '9', '5'],
+        36: ['10', '6', '9', '9', '5'],
+        38: [],
+        42: ['4', '5', '3', '6'],
+        44: ['3', '9', '4', '4', '5', '3', '6'],
+        45: ['7', '3', '9', '9', '4', '8'],
+        47: ['7', '6', '10', '5', '8'],
+        51: ['6', '8', '10', '5', '7'],
+        53: ['6', '10', '5']
+    }
+
     for tmp_item in bot_left:
-
         if pieces[tmp_item] == 'W':
-
-            if tmp_item == 2:
-                do_move('6')
-                do_move('7')
-                do_move('10')
-                do_move('10')
-                do_move('5')
-                do_move('8')
-
-            elif tmp_item == 8:
-                do_move('8')
-                do_move('9')
-                do_move('7')
-                do_move('6')
-                do_move('10')
-                do_move('5')
-
-            elif tmp_item == 9:
-                do_move('9')
-                do_move('6')
-                do_move('9')
-                do_move('5')
-
-            elif tmp_item == 11:
-                do_move('6')
-                do_move('9')
-                do_move('9')
-                do_move('5')
-
-            elif tmp_item == 17:
-                do_move('2')
-                do_move('6')
-                do_move('9')
-                do_move('9')
-                do_move('5')
-                do_move('1')
-
-            elif tmp_item == 18:
-                do_move('3')
-                do_move('9')
-                do_move('4')
-                do_move('6')
-                do_move('9')
-                do_move('9')
-                do_move('5')
-
-            elif tmp_item == 20:
-                do_move('4')
-                do_move('5')
-                do_move('3')
-                do_move('6')
-                do_move('3')
-                do_move('9')
-                do_move('4')
-
-            elif tmp_item == 24:
-                do_move('5')
-                do_move('4')
-                do_move('6')
-                do_move('3')
-                do_move('6')
-                do_move('10')
-                do_move('5')
-
-            elif tmp_item == 26:
-                do_move('6')
-                do_move('9')
-                do_move('5')
-                do_move('9')
-                do_move('6')
-                do_move('10')
-                do_move('5')
-
-            elif tmp_item == 27:
-                do_move('6')
-                do_move('10')
-                do_move('5')
-                do_move('9')
-                do_move('6')
-                do_move('10')
-                do_move('5')
-
-            elif tmp_item == 29:
-                do_move('8')
-                do_move('9')
-                do_move('7')
-                do_move('10')
-                do_move('6')
-                do_move('9')
-                do_move('5')
-
-            elif tmp_item == 33:
-                do_move('9')
-                do_move('6')
-                do_move('10')
-                do_move('5')
-
-            elif tmp_item == 35:
-                do_move('10')
-                do_move('6')
-                do_move('9')
-                do_move('5')
-
-            elif tmp_item == 36:
-                do_move('10')
-                do_move('6')
-                do_move('9')
-                do_move('9')
-                do_move('5')
-
-            elif tmp_item == 42:
-                do_move('4')
-                do_move('5')
-                do_move('3')
-                do_move('6')
-
-            elif tmp_item == 44:
-                do_move('3')
-                do_move('9')
-                do_move('4')
-                do_move('4')
-                do_move('5')
-                do_move('3')
-                do_move('6')
-
-            elif tmp_item == 45:
-                do_move('7')
-                do_move('3')
-                do_move('9')
-                do_move('9')
-                do_move('4')
-                do_move('8')
-
-            elif tmp_item == 47:
-                do_move('7')
-                do_move('6')
-                do_move('10')
-                do_move('5')
-                do_move('8')
-
-            elif tmp_item == 51:
-                do_move('6')
-                do_move('8')
-                do_move('10')
-                do_move('5')
-                do_move('7')
-
-            elif tmp_item == 53:
-                do_move('6')
-                do_move('10')
-                do_move('5')
-
+            do_seq(pos[tmp_item])
             break
 
 
 def find_7(top_right):
     '''Find 3'''
 
+    pos = {
+        0:  [],
+        2:  [],
+        6:  [],
+        8:  ['4', '10', '3', '2', '9', '1'],
+        9:  ['10', '7', '9', '8'],
+        11: ['9', '7', '10', '8'],
+        15: [],
+        17: ['7', '10', '8', '2', '10', '1'],
+        18: ['2', '10', '1', '7', '9', '8'],
+        20: ['10', '2', '10', '1', '7', '9', '8'],
+        24: ['7', '10', '10', '8', '2', '10', '1'],
+        26: ['2', '10', '10', '1', '9', '2', '10', '1'],
+        27: [],
+        29: ['4', '2', '9', '1', '3'],
+        33: ['9', '9', '2', '10', '1'],
+        35: ['2', '9', '1'],
+        36: ['10', '2', '10', '1'],
+        38: [],
+        42: ['2', '10', '10', '1'],
+        44: [],
+        45: ['2', '9', '1', '7', '9', '8'],
+        47: ['10', '2', '9', '1'],
+        51: ['4', '10', '3', '9', '2', '10', '1'],
+        53: ['9', '2', '10', '1']
+    }
+
     for tmp_item in top_right:
-
         if pieces[tmp_item] == 'W':
-
-            if tmp_item == 8:
-                do_move('4')
-                do_move('10')
-                do_move('3')
-                do_move('2')
-                do_move('9')
-                do_move('1')
-
-            elif tmp_item == 9:
-                do_move('10')
-                do_move('7')
-                do_move('9')
-                do_move('8')
-
-            elif tmp_item == 11:
-                do_move('9')
-                do_move('7')
-                do_move('10')
-                do_move('8')
-
-            elif tmp_item == 17:
-                do_move('7')
-                do_move('10')
-                do_move('8')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-
-            elif tmp_item == 18:
-                do_move('2')
-                do_move('10')
-                do_move('1')
-                do_move('7')
-                do_move('9')
-                do_move('8')
-
-            elif tmp_item == 20:
-                do_move('10')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-                do_move('7')
-                do_move('9')
-                do_move('8')
-
-            elif tmp_item == 24:
-                do_move('7')
-                do_move('10')
-                do_move('10')
-                do_move('8')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-
-            elif tmp_item == 26:
-                do_move('2')
-                do_move('10')
-                do_move('10')
-                do_move('1')
-                do_move('9')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-
-            elif tmp_item == 29:
-                do_move('4')
-                do_move('2')
-                do_move('9')
-                do_move('1')
-                do_move('3')
-
-            elif tmp_item == 33:
-                do_move('9')
-                do_move('9')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-
-            elif tmp_item == 35:
-                do_move('2')
-                do_move('9')
-                do_move('1')
-
-            elif tmp_item == 36:
-                do_move('10')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-
-            elif tmp_item == 42:
-                do_move('2')
-                do_move('10')
-                do_move('10')
-                do_move('1')
-
-            elif tmp_item == 45:
-                do_move('2')
-                do_move('9')
-                do_move('1')
-                do_move('7')
-                do_move('9')
-                do_move('8')
-
-            elif tmp_item == 47:
-                do_move('10')
-                do_move('2')
-                do_move('9')
-                do_move('1')
-
-            elif tmp_item == 51:
-                do_move('4')
-                do_move('10')
-                do_move('3')
-                do_move('9')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-
-            elif tmp_item == 53:
-                do_move('9')
-                do_move('2')
-                do_move('10')
-                do_move('1')
-
+            do_seq(pos[tmp_item])
             break
 
 
 def find_8(bot_right):
     '''Find 4'''
 
+    pos = {
+        0:  [],
+        2:  [],
+        6:  [],
+        8:  [],
+        9:  ['8', '10', '10', '7'],
+        11: ['10', '8', '10', '7'],
+        15: [],
+        17: [],
+        18: ['3', '7', '4', '8', '10', '8', '10', '7'],
+        20: ['8', '10', '10', '7', '9', '8', '10', '7'],
+        24: ['8', '10', '7', '10', '8', '9', '7'],
+        26: ['9', '8', '10', '7', '4', '9', '3'],
+        27: [],
+        29: ['8', '9', '7', '4', '9', '3'],
+        33: ['9', '9', '4', '10', '3'],
+        35: ['4', '9', '3'],
+        36: ['4', '10', '10', '3'],
+        38: [],
+        42: ['8', '9', '7'],
+        44: [],
+        45: [],
+        47: ['10', '4', '9', '3'],
+        51: ['4', '10', '3', '8', '10', '7'],
+        53: ['9', '4', '10', '3']
+    }
+
     for tmp_item in bot_right:
-
         if pieces[tmp_item] == 'W':
-
-            if tmp_item == 9:
-                do_move('8')
-                do_move('10')
-                do_move('10')
-                do_move('7')
-
-            elif tmp_item == 11:
-                do_move('10')
-                do_move('8')
-                do_move('10')
-                do_move('7')
-
-            elif tmp_item == 18:
-                do_move('3')
-                do_move('7')
-                do_move('4')
-                do_move('8')
-                do_move('10')
-                do_move('8')
-                do_move('10')
-                do_move('7')
-
-            elif tmp_item == 20:
-                do_move('8')
-                do_move('10')
-                do_move('10')
-                do_move('7')
-                do_move('9')
-                do_move('8')
-                do_move('10')
-                do_move('7')
-
-            elif tmp_item == 24:
-                do_move('8')
-                do_move('10')
-                do_move('7')
-                do_move('10')
-                do_move('8')
-                do_move('9')
-                do_move('7')
-
-            elif tmp_item == 26:
-                do_move('9')
-                do_move('8')
-                do_move('10')
-                do_move('7')
-                do_move('4')
-                do_move('9')
-                do_move('3')
-
-            elif tmp_item == 29:
-                do_move('8')
-                do_move('9')
-                do_move('7')
-                do_move('4')
-                do_move('9')
-                do_move('3')
-
-            elif tmp_item == 33:
-                do_move('9')
-                do_move('9')
-                do_move('4')
-                do_move('10')
-                do_move('3')
-
-            elif tmp_item == 35:
-                do_move('4')
-                do_move('9')
-                do_move('3')
-
-            elif tmp_item == 36:
-                do_move('4')
-                do_move('10')
-                do_move('10')
-                do_move('3')
-
-            elif tmp_item == 42:
-                do_move('8')
-                do_move('9')
-                do_move('7')
-
-            elif tmp_item == 47:
-                do_move('10')
-                do_move('4')
-                do_move('9')
-                do_move('3')
-
-            elif tmp_item == 51:
-                do_move('4')
-                do_move('10')
-                do_move('3')
-                do_move('8')
-                do_move('10')
-                do_move('7')
-
-            elif tmp_item == 53:
-                do_move('9')
-                do_move('4')
-                do_move('10')
-                do_move('3')
-
+            do_seq(pos[tmp_item])
             break
