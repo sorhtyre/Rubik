@@ -10,7 +10,6 @@ def find_solution():
     tmp_edges = [[9, 10, 11], [47, 50, 53], [35, 34, 33], [42, 39, 36]]
 
     tmp_loop = True
-    tmp_fail = False
     tmp_count = 0
 
     while tmp_loop:
@@ -58,9 +57,9 @@ def find_solution():
         if tmp_corners > 0:
             solve_corners()
 
-        tmp_count = tmp_count + 1
+        tmp_count += 1
         if tmp_count > 15:
-            return tmp_fail
+            return False
 
     return True
 
