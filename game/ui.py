@@ -26,19 +26,17 @@ else:
 def do_move(t_val):
     '''Execute move'''
 
-    if t_val == 'M':
-        mix_cube()
-    elif t_val == 'R':
-        reset_cube()
-        u_moves.clear()
-    elif t_val == 'U':
-        undo_move()
-    elif t_val == 'F':
-        find_solution()
-    elif t_val == 'T':
-        test_solver()
-    elif t_val == 'TM':
-        test_mult_solver()
+    switch.update({'M':  [mix_cube],
+                   'R':  [reset_cube, u_moves.clear],
+                   'U':  [undo_move],
+                   'F':  [find_solution],
+                   'T':  [test_solver],
+                   'TM': [test_mult_solver]})
+
+    args.update({'M': [], 'R': [], 'U': [], 'F': [], 'T': [], 'TM': []})
+
+    if t_val == '':
+        time.sleep(0)
     else:
         try:
             for i, func in enumerate(switch[t_val]):
