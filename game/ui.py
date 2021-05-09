@@ -1,6 +1,7 @@
 '''User interface functions'''
 
 import time
+import multiprocessing
 
 from os import system as cli
 from platform import system as arch
@@ -36,6 +37,8 @@ def do_move(t_val):
         find_solution()
     elif t_val == 'T':
         test_solver()
+    elif t_val == 'TM':
+        test_mult_solver()
     else:
         try:
             for i, func in enumerate(switch[t_val]):
@@ -119,10 +122,11 @@ def save_solution():
 def test_solver():
     '''Test random generated cubes'''
 
-    t_start = time.time()
+    t_start = time.process_time()
 
     works = True
     count = 0
+    len_moves = []
     cli(CLEAR)
 
     print('Solving: ', end='', flush=True)
@@ -132,13 +136,65 @@ def test_solver():
         print(count, end='', flush=True)
         mix_cube()
         works = solve_cube()
+        len_moves.append(len(s_moves))
         u_moves.clear()
         s_moves.clear()
         print('\033[' + str(len("%i" % count)) + 'D', end='', flush=True)
 
-    t_end = time.time()
+    cli(CLEAR)
+    t_end = time.process_time()
 
     print('Solved ' + str(count) + ' random cubes in ' +
           str(t_end - t_start) + ' secs')
     print(str((t_end - t_start)/count) + ' secs per cube')
-    time.sleep(5)
+
+    min_moves = min(len_moves)
+    max_moves = max(len_moves)
+    avg_moves = sum(len_moves) / count
+
+    print('Min moves to solve: ' + str(min_moves))
+    print('Max moves to solve: ' + str(max_moves))
+    print('Avg moves to solve: ' + str(avg_moves))
+
+    time.sleep(10)
+
+
+def test_mult_solver():
+    '''Test random generated cubes'''
+
+    t_start = time.perf_counter()
+
+    count = 10000
+    cli(CLEAR)
+
+    with multiprocessing.Pool() as pool:
+        ret_moves = pool.map(solver_call, range(count))
+
+    t_end = time.perf_counter()
+
+    print('Solved ' + str(count) + ' random cubes in ' +
+          str(t_end - t_start) + ' secs')
+    print(str((t_end - t_start)/count) + ' secs per cube')
+
+    min_moves = min(ret_moves)
+    max_moves = max(ret_moves)
+    avg_moves = sum(ret_moves) / count
+
+    print('Min moves to solve: ' + str(min_moves))
+    print('Max moves to solve: ' + str(max_moves))
+    print('Avg moves to solve: ' + str(avg_moves))
+
+    time.sleep(10)
+
+
+def solver_call(count):
+    '''Solver call'''
+
+    print('Solving' + '.' * int((10 / 10000) * count), end='\r', flush=True)
+    mix_cube()
+    solve_cube()
+    len_moves = len(s_moves)
+    u_moves.clear()
+    s_moves.clear()
+
+    return len_moves
