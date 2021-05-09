@@ -122,39 +122,21 @@ def test_solver():
 
     t_start = time.process_time()
 
-    works = True
     count = 0
     len_moves = []
     cli(CLEAR)
 
     print('Solving: ', end='', flush=True)
 
-    while works and count < 10000:
-        count += 1
+    for count in range(1, 10001):
         print(count, end='', flush=True)
-        mix_cube()
-        works = solve_cube()
-        len_moves.append(len(s_moves))
-        u_moves.clear()
-        s_moves.clear()
+        len_moves.append(solver_call(None))
         print('\033[' + str(len("%i" % count)) + 'D', end='', flush=True)
 
     cli(CLEAR)
     t_end = time.process_time()
 
-    print('Solved ' + str(count) + ' random cubes in ' +
-          str(t_end - t_start) + ' secs')
-    print(str((t_end - t_start)/count) + ' secs per cube')
-
-    min_moves = min(len_moves)
-    max_moves = max(len_moves)
-    avg_moves = sum(len_moves) / count
-
-    print('Min moves to solve: ' + str(min_moves))
-    print('Max moves to solve: ' + str(max_moves))
-    print('Avg moves to solve: ' + str(avg_moves))
-
-    time.sleep(10)
+    print_perf_test(t_start, t_end, count, len_moves)
 
 
 def test_mult_solver():
@@ -166,29 +148,18 @@ def test_mult_solver():
     cli(CLEAR)
 
     with multiprocessing.Pool() as pool:
-        ret_moves = pool.map(solver_call, range(count))
+        len_moves = pool.map(solver_call, range(count))
 
     t_end = time.perf_counter()
 
-    print('Solved ' + str(count) + ' random cubes in ' +
-          str(t_end - t_start) + ' secs')
-    print(str((t_end - t_start)/count) + ' secs per cube')
-
-    min_moves = min(ret_moves)
-    max_moves = max(ret_moves)
-    avg_moves = sum(ret_moves) / count
-
-    print('Min moves to solve: ' + str(min_moves))
-    print('Max moves to solve: ' + str(max_moves))
-    print('Avg moves to solve: ' + str(avg_moves))
-
-    time.sleep(10)
+    print_perf_test(t_start, t_end, count, len_moves)
 
 
 def solver_call(count):
     '''Solver call'''
 
-    print('Solving' + '.' * int((10 / 10000) * count), end='\r', flush=True)
+    if count is not None:
+        print('Solving' + '.' * int((10 / 10000) * count), end='\r', flush=True)
     mix_cube()
     solve_cube()
     len_moves = len(s_moves)
@@ -196,3 +167,21 @@ def solver_call(count):
     s_moves.clear()
 
     return len_moves
+
+
+def print_perf_test(t_start, t_end, count, tmp_list):
+    ''' Print performance test result'''
+
+    print('Solved ' + str(count) + ' random cubes in ' +
+          str(t_end - t_start) + ' secs')
+    print(str((t_end - t_start)/count) + ' secs per cube')
+
+    min_moves = min(tmp_list)
+    max_moves = max(tmp_list)
+    avg_moves = sum(tmp_list) // count
+
+    print('Min moves to solve: ' + str(min_moves))
+    print('Max moves to solve: ' + str(max_moves))
+    print('Avg moves to solve: ' + str(avg_moves))
+
+    time.sleep(10)
